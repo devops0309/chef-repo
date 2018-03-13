@@ -1,0 +1,16 @@
+dbpath = <%= node.default[:mongodb][:data_dir] %>
+logpath = <%= node.default[:mongodb][:log_dir] %>/mongodb.log
+logappend = true
+port = <%= node.default[:mongodb][:port] %>
+
+<% if node.default[:mongodb][:authorization][:enabled] == "true" %>
+#######Authorization is enabled
+##### Please enable auth parameter after creating admin user in mongodb
+##### auth = true
+########
+<% end %>
+<% if node.default[:mongodb][:replication][:enabled] == "true" %>
+replSet = <%= node.default[:mongodb][:replset] %>
+oplogSize = <%= node.default[:mongodb][:oplogsize] %>
+smallfiles = <%= node.default[:mongodb][:smallfiles] %>
+<% end %>

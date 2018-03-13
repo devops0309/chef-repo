@@ -1,0 +1,29 @@
+
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "admin12345",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+
+
+#############Follow the below steps:
+#### 1) create admin user by above command
+#### 2) enable auth in mongod.conf and restart it
+#### 3) Login using this command: mongo --port 27017 -u "admin" -p "admin12345" --authenticationDatabase "admin"
+#### 4) Create application specific user by this command:-
+
+
+use <databaseName>
+db.createUser(
+  {
+    user: "databaseUser",
+    pwd: "databasePassword",
+    roles: [ { role: "readWrite", db: "databaseName" },
+             { role: "read", db: "databaseName" } ]
+  }
+)
+
+#### 5) Connect to the application using this command:-  mongo --port 27017 -u "databaseUser" -p "databasePassword" --authenticationDatabase "databaseName"

@@ -1,0 +1,19 @@
+# ======================== Elasticsearch Configuration =========================
+###########   Managed by CHEF
+########### Do not edit it Manually
+
+cluster.name: <%= node.default[:elasticsearch][:clusterName] %>
+node.name: <%= node.name %>
+path.data: <%= node.default[:elasticsearch][:path][:data] %>
+path.logs: <%= node.default[:elasticsearch][:path][:log] %>
+network.host: <%= node.default[:elasticsearch][:network_host] %>
+#bootstrap.memory_lock: <%= node.default[:elasticsearch][:bootstrap_memory_lock] %>
+#gateway.expected_nodes: <%= node.default[:elasticsearch][:gateway_expected_nodes] %>
+<% if node.default[:elasticsearch][:cluster][:enabled] == "true" %>
+discovery.zen.ping.unicast.hosts: <%= node.default[:elasticsearch][:unicast_hosts] %>
+discovery.zen.minimum_master_nodes: <%= node.default[:elasticsearch][:minimum_master_nodes] %>
+<% end %>
+node.master: <%= node.default[:elasticsearch][:node][:master] %>
+node.data: <%= node.default[:elasticsearch][:node][:master] %>
+action.destructive_requires_name: <%= node.default[:elasticsearch][:destructive_requires_name] %>
+#gateway.recover_after_nodes: <%= node.default[:elasticsearch][:recover_after_nodes] %>
